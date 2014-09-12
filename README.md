@@ -7,4 +7,11 @@ http://www.lwjgl.org/index.php
 
 http://www.opengl.org/
 
-In Progress
+In Progress - 
+
+Now Renders a square
+
+
+TODO
+=========
+Working on getting basic animation on the square based on a timer
