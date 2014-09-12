@@ -113,14 +113,14 @@ public class Render {
 
 		//game render logic here, can probably pass off to another class if it gets comprehensive
 		//set quad colour
-		GL11.glColor3f(0.5f,0.5f,1.0f);
+		GL11.glColor3f(0.5f,1.5f,1.0f);
 
 		//draw quad vertices
 		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glVertex2f(100,100);
-		GL11.glVertex2f(100+200,100);
-		GL11.glVertex2f(100+200,100+200);
-		GL11.glVertex2f(100,100+200);
+		GL11.glVertex2f(200,100);
+		GL11.glVertex2f(200+200,100);
+		GL11.glVertex2f(200+200,100+200);
+		GL11.glVertex2f(200,100+200);
 		GL11.glEnd();
 	}
 
