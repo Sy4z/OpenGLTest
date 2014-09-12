@@ -135,9 +135,9 @@ public class Render {
 		//draw quad vertices
 		GL11.glBegin(GL11.GL_QUADS);
 		GL11.glVertex2f(x,y);
-		GL11.glVertex2f(x+200,y);
-		GL11.glVertex2f(x+200,y+200);
-		GL11.glVertex2f(x,y+200);
+		GL11.glVertex2f(x+80,y);
+		GL11.glVertex2f(x+80,y+80);
+		GL11.glVertex2f(x,y+80);
 		GL11.glEnd();
 
 		GL11.glPopMatrix();
@@ -151,23 +151,27 @@ public class Render {
 	 */
 	public void moveObject(){
 		//rotate by x degrees while it is moving;
-		rotation += 0.15f;
+		
 		
 		//Left
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
 			x-=0.5f;
+			rotation -= 0.15f;
 		}
 		//Right
 		if(Keyboard.isKeyDown(Keyboard.KEY_D)){
 			x+=0.5f;
+			rotation += 0.15f;
 		}
 		//Up
 		if(Keyboard.isKeyDown(Keyboard.KEY_W)){
 			y+=0.5f;
+			rotation += 0.15f;
 		}
 		//Down
 		if(Keyboard.isKeyDown(Keyboard.KEY_S)){
 			y-=0.5f;
+			rotation -= 0.15f;
 		}
 		
 		
