@@ -150,6 +150,9 @@ public class Render {
 	 * Method which makes calculations for movement based on keypresses
 	 */
 	public void moveObject(){
+		//rotate by x degrees while it is moving;
+		rotation += 0.15f;
+		
 		//Left
 		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
 			x-=0.5f;
