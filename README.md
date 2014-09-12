@@ -14,4 +14,4 @@ Now Renders a square
 
 TODO
 =========
-Working on getting basica animation on the square based on a timer
+Working on getting basic animation on the square based on a timer
