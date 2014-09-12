@@ -1,6 +1,7 @@
 package graphicsRender;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -16,13 +17,19 @@ import static org.lwjgl.opengl.GL11.glBlendFunc;
 import static org.lwjgl.opengl.GL11.glViewport;
 import static org.lwjgl.opengl.GL11.glClear;
 
-
+/**
+ * Class which Renders an Animated Square in OpenGL
+ */
 public class Render {
 
 	// Width and Height of Render Window
 	public static final int WIDTH = 800;
 	public static final int HEIGHT = 600;
-	boolean running = true;
+	/** angle of rotation for square*/
+	float rotation = 0;
+	/** position of Current square vertice */
+	float x = 300, y = 200;
+
 
 
 	public static void main(String[] args) throws LWJGLException {
@@ -60,10 +67,11 @@ public class Render {
 		resize();
 
 		//TODO Write small algorithm here to resize graphics when window is resized
-		while (running && !Display.isCloseRequested()) {
+		while (!Display.isCloseRequested()) {
 			;
 
 			// Render game
+			moveObject();
 			draw();
 
 			// Flip the buffers and sync to 60 FPS (Uses a double buffer system so what is stored in the other buffer will become displayed)
@@ -82,7 +90,7 @@ public class Render {
 	protected void create() {
 
 
-		// Enable blending - Without this, transparent sprites may not render
+		// Enable blending - Without this, transparent sprites may not render correctly
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
@@ -95,10 +103,10 @@ public class Render {
 	// Called to resize our game
 	protected void resize() {
 		glViewport(0, 0, Display.getWidth(), Display.getHeight());
-		// ... update projection matrices here ...
+		//update projection matrices here
 	}
 
-	// Called to destroy our game upon exiting
+	// Called to destroy game upon exiting
 	protected void dispose() {
 
 		//destroy any textures or other assets here
@@ -107,21 +115,63 @@ public class Render {
 
 	// Game Loop
 	protected void draw() {
-		// Clear the screen and also the depth buffer, considering this is 3D
+		// Clear the screen and also the depth buffer
 		GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
 
 
 		//game render logic here, can probably pass off to another class if it gets comprehensive
 		//set quad colour
-		GL11.glColor3f(0.5f,1.5f,1.0f);
+
+		GL11.glColor3f(0.5f,1.5f,0.5f);
+
+
+
+		GL11.glPushMatrix();
+		GL11.glTranslatef(x, y, 0);
+		GL11.glRotatef(rotation, 0f, 0f, 1f);
+		GL11.glTranslatef(-x, -y, 0);
+
 
 		//draw quad vertices
 		GL11.glBegin(GL11.GL_QUADS);
-		GL11.glVertex2f(200,100);
-		GL11.glVertex2f(200+200,100);
-		GL11.glVertex2f(200+200,100+200);
-		GL11.glVertex2f(200,100+200);
+		GL11.glVertex2f(x,y);
+		GL11.glVertex2f(x+200,y);
+		GL11.glVertex2f(x+200,y+200);
+		GL11.glVertex2f(x,y+200);
 		GL11.glEnd();
+
+		GL11.glPopMatrix();
+
+
+
+	}
+
+	/**
+	 * Method which makes calculations for movement based on keypresses
+	 */
+	public void moveObject(){
+		//Left
+		if(Keyboard.isKeyDown(Keyboard.KEY_A)){
+			x-=0.5f;
+		}
+		//Right
+		if(Keyboard.isKeyDown(Keyboard.KEY_D)){
+			x+=0.5f;
+		}
+		//Up
+		if(Keyboard.isKeyDown(Keyboard.KEY_W)){
+			y+=0.5f;
+		}
+		//Down
+		if(Keyboard.isKeyDown(Keyboard.KEY_S)){
+			y-=0.5f;
+		}
+		
+		
+
+
+
+
 	}
 
 }
